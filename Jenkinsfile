@@ -26,6 +26,7 @@ stage('Verify Kubernetes Access') {
             sh "kubectl auth can-i get clusters --kubeconfig=${kubeconfigPath}"
         }
     }
+}
 
 
 
