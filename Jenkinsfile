@@ -10,14 +10,13 @@ pipeline {
         KUBECONFIG = credentials('gonzalkb-225')                                             // <------change this
     }
 
-    stages {
+  stages {
         stage('Checkout') {
             steps {
                 checkout([$class: 'GitSCM', branches: [[name: '*/main']],
                           userRemoteConfigs: [[url: "${GITHUB_URL}"]]])
             }
         }
-
 
         stage('Build Docker Image') {
             steps {
