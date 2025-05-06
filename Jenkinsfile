@@ -7,7 +7,7 @@ pipeline {
         DOCKER_IMAGE = 'cithit/gonzalkb'                                                 // <------change this
         IMAGE_TAG = "build-${BUILD_NUMBER}"
         GITHUB_URL = 'https://github.com/gonzalkb/225-lab3-1.git'                   // <------change this
-        KUBECONFIG = credentials('gonzalkb-225')                                             // <------change this
+        KUBECONFIG = credentials('gonzalkb')                                             // <------change this
     }
 
     stages {
