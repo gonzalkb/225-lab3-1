@@ -4,10 +4,10 @@ pipeline {
 
     environment {
         DOCKER_CREDENTIALS_ID = 'roseaw-dockerhub'
-        DOCKER_IMAGE = 'gonzalkb/225-lab3-1'                                                 // <------change this
+        DOCKER_IMAGE = 'cithit/gonzalkb'                                                 // <------change this
         IMAGE_TAG = "build-${BUILD_NUMBER}"
         GITHUB_URL = 'https://github.com/gonzalkb/225-lab3-1.git'                   // <------change this
-        KUBECONFIG = credentials('gonzalkb')                                             // <------change this
+        KUBECONFIG = credentials('gonzalkb-225')                                             // <------change this
     }
 
     stages {
@@ -40,7 +40,7 @@ pipeline {
             steps {
                 script {
                     // Set up Kubernetes configuration using the specified KUBECONFIG
-                    def kubeConfig = readFile(gonzalkb-225)
+                    def kubeConfig = readFile(KUBECONFIG)
                     // Update deployment-dev.yaml to use the new image tag
                     sh "sed -i 's|${DOCKER_IMAGE}:latest|${DOCKER_IMAGE}:${IMAGE_TAG}|' deployment.yaml"
                     sh "kubectl apply -f deployment.yaml"
