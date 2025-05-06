@@ -22,12 +22,11 @@ stage('Verify Kubernetes Access') {
     steps {
         script {
             def kubeconfigPath = "${env.WORKSPACE}/kubeconfig.yaml"
-            writeFile file: kubeconfigPath, text: KUBECONFIG
+            writeFile file: kubeconfigPath, text: KUBECONFIG.trim()
             sh "kubectl auth can-i get clusters --kubeconfig=${kubeconfigPath}"
         }
     }
 }
-
 
 
         stage('Build Docker Image') {
