@@ -18,13 +18,15 @@ pipeline {
             }
         }
 
-stage('Check KUBECONFIG') {
+stage('Verify Kubernetes Access') {
     steps {
         script {
-            sh "echo $KUBECONFIG"
+            def kubeconfigPath = "${env.WORKSPACE}/kubeconfig.yaml"
+            writeFile file: kubeconfigPath, text: KUBECONFIG
+            sh "kubectl auth can-i get clusters --kubeconfig=${kubeconfigPath}"
         }
     }
-}
+
 
 
         stage('Build Docker Image') {
