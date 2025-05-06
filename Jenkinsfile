@@ -18,6 +18,15 @@ pipeline {
             }
         }
 
+        
+stage('Verify Kubernetes Access') {
+    steps {
+        script {
+            sh "kubectl auth can-i get clusters --kubeconfig=/path/to/gonzalkb-225.yaml"
+        }
+    }
+}
+
         stage('Build Docker Image') {
             steps {
                 script {
